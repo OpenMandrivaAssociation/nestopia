@@ -1,23 +1,20 @@
-Name:			nestopia
-Version:		1.40h
-%define sversion 	%(sed -e "s/[a-z.]//g"<<<%{version})
-%define oversion 	%(sed -e "s/[0-9.]//g"<<<%{version})
-Release:		%mkrel 2
+Name:		nestopia
+Version:	1.43
+Release:	2
 
 Summary:	A portable Nintendo Entertainment System emulator
 License:	GPLv2+
 Group:		Emulators
-URL:		http://rbelmont.mameworld.info/?page_id=200
-# and http://nestopia.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/nestopia/Nestopia%{sversion}src.zip
-Source1:	http://rbelmont.mameworld.info/nst%{sversion}_lnx_release_%{oversion}.zip
-Source2:	nestopia-wrapper
-Source3:	nestopia-48.png
+URL:		http://0ldsk00l.ca/nestopia.html
+Source0:	https://github.com/downloads/rdanbrook/nestopia/nestopia-1.43.tgz
+Patch0:		nestopia-1.43-makefile.patch
 
-BuildRequires:	gtk2-devel
-BuildRequires:	SDL-devel
-BuildRequires:	alsa-lib-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}
+BuildRequires:	pkgconfig(alsa)
+BuildRequires:	pkgconfig(gl)
+BuildRequires:	pkgconfig(glu)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(x11)
 
 %description
 NEStopia is a portable Nintendo Entertainment System emulator written in C++ 
@@ -46,29 +43,28 @@ A few features:
  file managers, including KDE’s Konqueror and GNOME’s Nautilus.
 
 %prep
-%setup -c -q -a1
+%setup -q
+%patch0 -p1
 
 %build
+%make
 
 %install
-rm -rf %{buildroot}
-make
-
 # binary
-install -d -m 755 %{buildroot}/%{_bindir}
-install -m 755 nst %{buildroot}/%{_bindir}/
-
-# wrapper
-install -m 755 %{_sourcedir}/nestopia-wrapper %{buildroot}/%{_bindir}/nestopia
+install -d -m 755 %{buildroot}%{_bindir}
+install -m 755 nestopia %{buildroot}%{_bindir}/
 
 # data files
-install -d -m 755 %{buildroot}/%{_datadir}/nestopia
-install -m 644 NstDatabase.xml %{buildroot}/%{_datadir}/nestopia/
-install -m 644 nstcontrols %{buildroot}/%{_datadir}/nestopia/
+install -d -m 755 %{buildroot}%{_datadir}/nestopia
+install -m 644 NstDatabase.xml %{buildroot}%{_datadir}/nestopia/
+install -d -m 755 %{buildroot}%{_datadir}/nestopia/icons
+install -m 644 source/linux/icons/nespad.svg %{buildroot}%{_datadir}/nestopia/icons/
 
-# icon
-install -d -m 755 %{buildroot}/%{_iconsdir}
-install -m 644 %{_sourcedir}/nestopia-48.png %{buildroot}/%{_iconsdir}/nestopia.png
+# icons
+for N in 32 48 64 96 128;
+do
+install -D source/linux/icons/%{name}${N}.png %{buildroot}%{_iconsdir}/hicolor/${N}x${N}/apps/%{name}.png
+done
 
 # xdg menu
 install -d -m 755 %{buildroot}%{_datadir}/applications
@@ -77,7 +73,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-nestopia.desktop << EOF
 Encoding=UTF-8
 Name=NEStopia
 Comment=%{summary}
-Exec=%{_bindir}/nestopia
+Exec=nestopia
 Icon=nestopia
 Terminal=false
 Type=Application
@@ -85,14 +81,9 @@ Categories=X-MandrivaLinux-MoreApplications-Emulators;Emulator;
 EOF
 
 %files
-%defattr(-,root,root)
-%doc README.Linux
+%doc README.linux
 %{_bindir}/nestopia
-%{_bindir}/nst
 %{_datadir}/nestopia
-%{_iconsdir}/nestopia.png
+%{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/mandriva-nestopia.desktop
-
-%clean
-rm -rf %{buildroot}
 
