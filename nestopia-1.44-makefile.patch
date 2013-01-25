@@ -1,6 +1,6 @@
 diff -urN nestopia-1.44/Makefile nestopia-1.44-patched/Makefile
 --- nestopia-1.44/Makefile	2013-01-23 04:20:43.000000000 +1100
-+++ nestopia-1.44-patched/Makefile	2013-01-25 17:40:52.870263231 +1100
++++ nestopia-1.44-patched/Makefile	2013-01-25 18:05:22.550035052 +1100
 @@ -28,7 +28,7 @@
  
  ifeq ($(UNAME), Linux)
@@ -19,3 +19,12 @@ diff -urN nestopia-1.44/Makefile nestopia-1.44-patched/Makefile
  BINDIR = $(PREFIX)/bin
  DATADIR = $(PREFIX)/share/nestopia
  
+@@ -182,7 +182,7 @@
+ 
+ $(sort $(OBJDIRS)):
+ 	@echo Creating output directory $@
+-	@mkdir $@
++	@mkdir -p $@
+ 
+ # link the commandline binary
+ $(BIN): $(OBJS)
