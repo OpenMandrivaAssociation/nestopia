@@ -1,13 +1,13 @@
 Name:		nestopia
-Version:	1.43
-Release:	2
+Version:	1.44
+Release:	1
 
 Summary:	A portable Nintendo Entertainment System emulator
 License:	GPLv2+
 Group:		Emulators
 URL:		http://0ldsk00l.ca/nestopia.html
-Source0:	https://github.com/downloads/rdanbrook/nestopia/nestopia-1.43.tgz
-Patch0:		nestopia-1.43-makefile.patch
+Source0:	https://github.com/downloads/rdanbrook/nestopia/%{name}-%{version}.tgz
+Patch0:		nestopia-1.44-makefile.patch
 
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gl)
@@ -58,12 +58,12 @@ install -m 755 nestopia %{buildroot}%{_bindir}/
 install -d -m 755 %{buildroot}%{_datadir}/nestopia
 install -m 644 NstDatabase.xml %{buildroot}%{_datadir}/nestopia/
 install -d -m 755 %{buildroot}%{_datadir}/nestopia/icons
-install -m 644 source/linux/icons/nespad.svg %{buildroot}%{_datadir}/nestopia/icons/
+install -m 644 source/unix/icons/nespad.svg %{buildroot}%{_datadir}/nestopia/icons/
 
 # icons
 for N in 32 48 64 96 128;
 do
-install -D source/linux/icons/%{name}${N}.png %{buildroot}%{_iconsdir}/hicolor/${N}x${N}/apps/%{name}.png
+install -D source/unix/icons/%{name}${N}.png %{buildroot}%{_iconsdir}/hicolor/${N}x${N}/apps/%{name}.png
 done
 
 # xdg menu
@@ -81,7 +81,7 @@ Categories=X-MandrivaLinux-MoreApplications-Emulators;Emulator;
 EOF
 
 %files
-%doc README.linux
+%doc README.unix
 %{_bindir}/nestopia
 %{_datadir}/nestopia
 %{_iconsdir}/hicolor/*/apps/%{name}.png
