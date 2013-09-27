@@ -1,18 +1,18 @@
-Name:		nestopia
-Version:	1.44
-Release:	1
-
 Summary:	A portable Nintendo Entertainment System emulator
+Name:		nestopia
+Version:	1.45
+Release:	1
 License:	GPLv2+
 Group:		Emulators
-URL:		http://0ldsk00l.ca/nestopia.html
+Url:		http://0ldsk00l.ca/nestopia.html
 Source0:	https://github.com/downloads/rdanbrook/nestopia/%{name}-%{version}.tgz
-Patch0:		nestopia-1.44-makefile.patch
+Patch0:		nestopia-1.45-makefile.patch
 
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(x11)
 
@@ -41,6 +41,15 @@ A few features:
 - Autodetection of PAL and NTSC format games
 - Supports drag and drop of compatible games and music rips from modern Linux 
  file managers, including KDE’s Konqueror and GNOME’s Nautilus.
+
+%files
+%doc README.unix
+%{_bindir}/nestopia
+%{_datadir}/nestopia
+%{_iconsdir}/hicolor/*/apps/%{name}.png
+%{_datadir}/applications/mandriva-nestopia.desktop
+
+#----------------------------------------------------------------------------
 
 %prep
 %setup -q
@@ -79,11 +88,4 @@ Terminal=false
 Type=Application
 Categories=X-MandrivaLinux-MoreApplications-Emulators;Emulator;
 EOF
-
-%files
-%doc README.unix
-%{_bindir}/nestopia
-%{_datadir}/nestopia
-%{_iconsdir}/hicolor/*/apps/%{name}.png
-%{_datadir}/applications/mandriva-nestopia.desktop
 

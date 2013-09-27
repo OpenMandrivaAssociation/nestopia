@@ -1,12 +1,12 @@
-diff -urN nestopia-1.44/Makefile nestopia-1.44-patched/Makefile
---- nestopia-1.44/Makefile	2013-01-23 04:20:43.000000000 +1100
-+++ nestopia-1.44-patched/Makefile	2013-01-25 18:05:22.550035052 +1100
+diff -urN nestopia-1.45/Makefile nestopia-1.45-patched/Makefile
+--- nestopia-1.45/Makefile	2013-01-23 04:20:43.000000000 +1100
++++ nestopia-1.45-patched/Makefile	2013-01-25 18:05:22.550035052 +1100
 @@ -28,7 +28,7 @@
  
  ifeq ($(UNAME), Linux)
  	CXXFLAGS += -Wno-deprecated -Wno-unused-result -Wno-write-strings -fno-rtti
--	LIBS = -lstdc++ -lm -lz -lasound $(shell sdl-config --libs) $(shell pkg-config --libs gtk+-3.0)
-+	LIBS = -lstdc++ -lm -lz -lasound -lX11 $(shell sdl-config --libs) $(shell pkg-config --libs gtk+-3.0)
+-	LIBS = -lstdc++ -lm -lz -larchive -lasound $(shell sdl-config --libs) $(shell pkg-config --libs gtk+-3.0)
++	LIBS = -lstdc++ -lm -lz -larchive -lasound -lX11 $(shell sdl-config --libs) $(shell pkg-config --libs gtk+-3.0)
  endif
  ifneq ($(UNAME), Linux)
  	CXXFLAGS += -Wno-deprecated -Wno-write-strings -fno-rtti
