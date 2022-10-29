@@ -17,6 +17,11 @@ BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(x11)
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	autoconf-archive
+BuildRequires:	libtool
+
 %description
 NEStopia is a portable Nintendo Entertainment System emulator written in C++ 
 by Martin Freij and ported to Linux by R. Belmont.
