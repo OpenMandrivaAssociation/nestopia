@@ -1,12 +1,13 @@
+%global optflags %{optflags} -Wno-c++11-narrowing
+
 Summary:	A portable Nintendo Entertainment System emulator
 Name:		nestopia
-Version:	1.45
-Release:	2
+Version:	1.51.1
+Release:	1
 License:	GPLv2+
 Group:		Emulators
 Url:		http://0ldsk00l.ca/nestopia.html
-Source0:	https://github.com/downloads/rdanbrook/nestopia/%{name}-%{version}.tgz
-Patch0:		nestopia-1.45-makefile.patch
+Source0:	https://github.com/0ldsk00l/nestopia/archive/refs/tags/%{version}.tar.gz
 
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gl)
@@ -43,49 +44,20 @@ A few features:
  file managers, including KDE’s Konqueror and GNOME’s Nautilus.
 
 %files
-%doc README.unix
 %{_bindir}/nestopia
 %{_datadir}/nestopia
-%{_iconsdir}/hicolor/*/apps/%{name}.png
-%{_datadir}/applications/mandriva-nestopia.desktop
+%{_iconsdir}/hicolor/*/apps/*
+%{_datadir}/applications/nestopia.desktop
+%doc %{_docdir}/nestopia
 
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q
-%patch0 -p1
+%autosetup -p1
+%configure
 
 %build
-%make
+%make_build
 
 %install
-# binary
-install -d -m 755 %{buildroot}%{_bindir}
-install -m 755 nestopia %{buildroot}%{_bindir}/
-
-# data files
-install -d -m 755 %{buildroot}%{_datadir}/nestopia
-install -m 644 NstDatabase.xml %{buildroot}%{_datadir}/nestopia/
-install -d -m 755 %{buildroot}%{_datadir}/nestopia/icons
-install -m 644 source/unix/icons/nespad.svg %{buildroot}%{_datadir}/nestopia/icons/
-
-# icons
-for N in 32 48 64 96 128;
-do
-install -D source/unix/icons/%{name}${N}.png %{buildroot}%{_iconsdir}/hicolor/${N}x${N}/apps/%{name}.png
-done
-
-# xdg menu
-install -d -m 755 %{buildroot}%{_datadir}/applications
-cat > %{buildroot}%{_datadir}/applications/mandriva-nestopia.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Name=NEStopia
-Comment=%{summary}
-Exec=nestopia
-Icon=nestopia
-Terminal=false
-Type=Application
-Categories=X-MandrivaLinux-MoreApplications-Emulators;Emulator;
-EOF
-
+%make_install
