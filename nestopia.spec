@@ -12,7 +12,7 @@ Source0:	https://github.com/0ldsk00l/nestopia/archive/refs/tags/%{version}.tar.g
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
-BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	fltk-devel
 BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	pkgconfig(x11)
