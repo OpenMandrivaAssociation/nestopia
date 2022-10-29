@@ -16,6 +16,15 @@ BuildRequires:	fltk-devel
 BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	pkgconfig(x11)
+BuildRequires:	pkgconfig(libjpeg)
+BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(xext)
+BuildRequires:	pkgconfig(xinerama)
+BuildRequires:	pkgconfig(xfixes)
+BuildRequires:	pkgconfig(xcursor)
+BuildRequires:	pkgconfig(xft)
+BuildRequires:	pkgconfig(xrender)
+BuildRequires:	pkgconfig(fontconfig)
 
 BuildRequires:	autoconf
 BuildRequires:	automake
