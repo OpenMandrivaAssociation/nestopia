@@ -6,7 +6,7 @@ Version:	1.52.1
 Release:	1
 License:	GPLv2+
 Group:		Emulators
-Url:		http://0ldsk00l.ca/nestopia.html
+Url:		https://0ldsk00l.ca/nestopia.html
 Source0:	https://github.com/0ldsk00l/nestopia/archive/refs/tags/%{version}.tar.gz
 
 BuildRequires:	pkgconfig(alsa)
