@@ -3,7 +3,7 @@
 Summary:	A portable Nintendo Entertainment System emulator
 Name:		nestopia
 Version:	1.52.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Emulators
 Url:		https://0ldsk00l.ca/nestopia.html
