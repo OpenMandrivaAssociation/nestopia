@@ -9,6 +9,8 @@ Group:		Emulators
 Url:		https://0ldsk00l.ca/nestopia.html
 Source0:	https://github.com/0ldsk00l/nestopia/archive/refs/tags/%{version}.tar.gz
 
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
